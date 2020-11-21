@@ -20,16 +20,21 @@ end
 
 # number of tourist & price
 number = gets.to_i
+# total_priceは通常価格
+total_price = (number * price).to_s.reverse.scan(/.{1,3}/).join(',').reverse
+# discount_price = 10%割引した価格
+discount_price = ((number * price * 0.9).floor).to_s.reverse.scan(/.{1,3}/).join(',').reverse
+
 if number < 5
   puts <<~TEXT
   #{number}人
-  合計料金 : ¥#{(number * price).to_s.reverse.scan(/.{1,3}/).join(',').reverse}
+  合計料金 : ¥#{total_price}
 TEXT
 
 else
   puts <<~TEXT
   #{number}人
   5人以上なので10%割引となります
-  合計料金 : ¥#{(number * price - number * price * 1/10).to_s.reverse.scan(/.{1,3}/).join(',').reverse}
+  合計料金 : ¥#{discount_price}
   TEXT
 end
